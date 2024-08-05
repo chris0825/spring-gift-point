@@ -43,6 +43,13 @@ public class ApiProductController implements ProductControllerDocs {
         return productService.getAllProducts(pageable);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> findProductById(@PathVariable Long id) {
+        System.out.println("[ApiProductController] findProduct()");
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(productService.findById(id));
+    }
+
     @PostMapping
     public ResponseEntity<Product> registerProduct(
         @Valid @RequestBody ProductDTO productDTO,
