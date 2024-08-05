@@ -61,5 +61,5 @@ public interface ProductControllerDocs {
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Page.class))),
         @ApiResponse(responseCode = "401", description = "인증과 관련된 문제(인증 헤더 누락 또는 토큰 인증 실패)가 발생한 경우"),
         @ApiResponse(responseCode = "500", description = "사용자의 요청은 올바르나, 서버가 이를 올바르게 처리하지 못한 경우")})
-    Page<?> searchProduct(String keyword, Pageable pageable);
+    List<?> searchProduct(String keyword, Pageable pageable);
 }

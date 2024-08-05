@@ -4,6 +4,7 @@ import static gift.product.exception.GlobalExceptionHandler.UNKNOWN_VALIDATION_E
 
 import gift.product.docs.ProductControllerDocs;
 import gift.product.dto.ProductDTO;
+import gift.product.dto.ProductResponseDTO;
 import gift.product.model.Product;
 import gift.product.service.ProductService;
 import jakarta.validation.Valid;
@@ -38,9 +39,9 @@ public class ApiProductController implements ProductControllerDocs {
     }
 
     @GetMapping
-    public List<Product> getAllProducts(Pageable pageable) {
+    public List<ProductResponseDTO> getAllProducts(Pageable pageable) {
         System.out.println("[ProductController] getAllProducts()");
-        return productService.getAllProducts(pageable);
+        return pageToList(productService.getAllProducts(pageable));
     }
 
     @GetMapping("/{id}")
@@ -89,10 +90,16 @@ public class ApiProductController implements ProductControllerDocs {
     }
 
     @GetMapping("/search")
-    public Page<Product> searchProduct(
+    public List<ProductResponseDTO> searchProduct(
         @RequestParam("keyword") String keyword,
         Pageable pageable) {
         System.out.println("[ProductController] searchProduct()");
-        return productService.searchProducts(keyword, pageable);
+        return pageToList(productService.searchProducts(keyword, pageable));
+    }
+
+    private List<ProductResponseDTO> pageToList(Page<Product> products) {
+        return products.stream()
+            .map(ProductResponseDTO::new)
+            .toList();
     }
 }

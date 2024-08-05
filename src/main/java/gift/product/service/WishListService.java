@@ -37,7 +37,7 @@ public class WishListService {
         this.productRepository = productRepository;
     }
 
-    public List<WishResponseDTO> getAllWishes(String authorization, Pageable pageable) {
+    public Page<Wish> getAllWishes(String authorization, Pageable pageable) {
         System.out.println("[WishListService] getAllProducts()");
         Long memberId = jwtUtil.parsingToken(authorization).getId();
         return wishListRepository.findAllByMemberId(memberId, pageable);

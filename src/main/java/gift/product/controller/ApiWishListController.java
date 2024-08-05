@@ -3,6 +3,7 @@ package gift.product.controller;
 import gift.product.docs.WishListControllerDocs;
 import gift.product.dto.WishRequestDTO;
 import gift.product.dto.WishResponseDTO;
+import gift.product.model.Wish;
 import gift.product.service.WishListService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ApiWishListController implements WishListControllerDocs {
         @RequestHeader("Authorization") String authorization,
         Pageable pageable) {
         System.out.println("[ApiWishListController] showProductList()");
-        return wishListService.getAllWishes(authorization, pageable);
+        return pageToList(wishListService.getAllWishes(authorization, pageable));
     }
 
     @PostMapping
@@ -55,5 +56,11 @@ public class ApiWishListController implements WishListControllerDocs {
         System.out.println("[ApiWishListController] deleteWishProduct()");
         wishListService.deleteWishProduct(authorization, productId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    private List<WishResponseDTO> pageToList(Page<Wish> wishes) {
+        return wishes.stream()
+            .map(WishResponseDTO::new)
+            .toList();
     }
 }

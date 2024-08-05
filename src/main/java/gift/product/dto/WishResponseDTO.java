@@ -1,6 +1,7 @@
 package gift.product.dto;
 
 import gift.product.model.Product;
+import gift.product.model.Wish;
 
 public class WishResponseDTO {
 
@@ -10,6 +11,11 @@ public class WishResponseDTO {
     public WishResponseDTO(Long id, Product product) {
         this.id = id;
         this.product = product;
+    }
+
+    public WishResponseDTO(Wish wish) {
+        this.id = wish.getId();
+        this.product = wish.getProduct();
     }
 
     public Long getId() {

@@ -77,8 +77,8 @@ public class ProductService {
         return productRepository.findByName(keyword, pageable);
     }
 
-    public List<Product> getAllProducts(Pageable pageable) {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     public Product findById(Long id) {
