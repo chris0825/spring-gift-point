@@ -1,16 +1,21 @@
 package gift.product.controller;
 
+import static gift.product.exception.GlobalExceptionHandler.UNKNOWN_VALIDATION_ERROR;
+
 import gift.product.docs.CategoryControllerDocs;
 import gift.product.dto.CategoryDTO;
 import gift.product.model.Category;
 import gift.product.service.CategoryService;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +37,14 @@ public class ApiCategoryController implements CategoryControllerDocs {
     }
 
     @PostMapping
-    public ResponseEntity<Category> registerCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<Category> registerCategory(@Valid @RequestBody CategoryDTO categoryDTO, BindingResult bindingResult) {
         System.out.println("[CategoryController] registerCategory()");
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null)
+                throw new ValidationException(fieldError.getDefaultMessage());
+            throw new ValidationException(UNKNOWN_VALIDATION_ERROR);
+        }
         Category category = categoryService.registerCategory(categoryDTO.convertToDomain());
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
     }
@@ -45,8 +56,17 @@ public class ApiCategoryController implements CategoryControllerDocs {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<Category> updateCategory(
+        @PathVariable Long id,
+        @Valid @RequestBody CategoryDTO categoryDTO,
+        BindingResult bindingResult) {
         System.out.println("[CategoryController] updateCategory()");
+        if (bindingResult.hasErrors()) {
+            FieldError fieldError = bindingResult.getFieldError();
+            if (fieldError != null)
+                throw new ValidationException(fieldError.getDefaultMessage());
+            throw new ValidationException(UNKNOWN_VALIDATION_ERROR);
+        }
         Category category = categoryService.updateCategory(categoryDTO.convertToDomain(id));
         return ResponseEntity.status(HttpStatus.CREATED).body(category);
     }
