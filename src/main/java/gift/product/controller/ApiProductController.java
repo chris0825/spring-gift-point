@@ -8,6 +8,7 @@ import gift.product.model.Product;
 import gift.product.service.ProductService;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,8 +38,8 @@ public class ApiProductController implements ProductControllerDocs {
     }
 
     @GetMapping
-    public Page<Product> showProductList(Pageable pageable) {
-        System.out.println("[ProductController] showProductList()");
+    public List<Product> getAllProducts(Pageable pageable) {
+        System.out.println("[ProductController] getAllProducts()");
         return productService.getAllProducts(pageable);
     }
 
