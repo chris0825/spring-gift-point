@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ public interface WishListControllerDocs {
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Page.class))),
         @ApiResponse(responseCode = "401", description = "인증과 관련된 문제(인증 헤더 누락 또는 토큰 인증 실패)가 발생한 경우"),
         @ApiResponse(responseCode = "500", description = "사용자 요청에는 문제가 없으나, 서버가 이를 올바르게 처리하지 못한 경우")})
-    Page<WishResponseDTO> showProductList(String authorization, Pageable pageable);
+    List<WishResponseDTO> showProductList(String authorization, Pageable pageable);
 
     @Operation(summary = "위시 상품 등록", description = "위시 상품을 등록합니다.")
     @ApiResponses(value = {

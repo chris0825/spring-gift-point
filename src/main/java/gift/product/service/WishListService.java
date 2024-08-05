@@ -13,6 +13,7 @@ import gift.product.model.Wish;
 import gift.product.repository.ProductRepository;
 import gift.product.repository.WishListRepository;
 import gift.product.util.JwtUtil;
+import java.util.List;
 import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,7 @@ public class WishListService {
         this.productRepository = productRepository;
     }
 
-    public Page<WishResponseDTO> getAllWishes(String authorization, Pageable pageable) {
+    public List<WishResponseDTO> getAllWishes(String authorization, Pageable pageable) {
         System.out.println("[WishListService] getAllProducts()");
         Long memberId = jwtUtil.parsingToken(authorization).getId();
         return wishListRepository.findAllByMemberId(memberId, pageable);

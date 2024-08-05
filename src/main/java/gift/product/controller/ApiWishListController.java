@@ -5,6 +5,7 @@ import gift.product.dto.WishRequestDTO;
 import gift.product.dto.WishResponseDTO;
 import gift.product.service.WishListService;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class ApiWishListController implements WishListControllerDocs {
     }
 
     @GetMapping
-    public Page<WishResponseDTO> showProductList(
+    public List<WishResponseDTO> showProductList(
         @RequestHeader("Authorization") String authorization,
         Pageable pageable) {
         System.out.println("[ApiWishListController] showProductList()");
