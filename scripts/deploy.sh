@@ -4,6 +4,9 @@ PROJECT_NAME=spring-gift-point
 BUILD_PATH=build/libs
 JAR_NAME=$(basename $PROJECT_PATH/$PROJECT_NAME/.*jar)
 
+echo "> Git move step3 branch"
+git checkout step3
+
 echo "> 프로젝트로 이동"
 cd $PROJECT_PATH/$PROJECT_NAME
 
@@ -36,8 +39,3 @@ fi
 echo "> 새 애플리케이션 배포"
 JAR_NAME=$(ls -tr $PROJECT_PATH/$PROJECT_NAME/$BUILD_PATH | grep *.jar | tail -n 1)
 java -jar $JAR_NAME &
-
-sleep 5
-
-echo "> 배포한 애플리케이션을 백그라운드에서 실행하도록 변경합니다."
-nohup java -jar $JAR_NAME &
