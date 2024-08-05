@@ -8,9 +8,8 @@ import gift.product.model.Option;
 import gift.product.service.OptionService;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -36,11 +35,9 @@ public class ApiOptionController implements OptionControllerDocs {
     }
 
     @GetMapping
-    public Page<Option> getAllOptions(
-        @PathVariable Long productId,
-        Pageable pageable) {
+    public List<Option> getAllOptions(@PathVariable Long productId) {
         System.out.println("[ApiOptionController] getAllOptions()");
-        return optionService.getAllOptions(productId, pageable);
+        return optionService.getAllOptions(productId);
     }
 
     @PostMapping

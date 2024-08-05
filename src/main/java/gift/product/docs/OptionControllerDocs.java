@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ public interface OptionControllerDocs {
         @ApiResponse(responseCode = "200", description = "옵션 목록 정상 출력",
             content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Page.class))),
         @ApiResponse(responseCode = "401", description = "인증과 관련된 문제 발생(인증 헤더 누락 또는 토큰 인증 실패)")})
-    Page<?> getAllOptions(Long productId, Pageable pageable);
+    List<?> getAllOptions(Long productId);
 
     @Operation(summary = "옵션 등록", description = "특정 상품에 옵션을 등록합니다.")
     @ApiResponses(value = {

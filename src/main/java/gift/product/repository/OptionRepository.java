@@ -14,7 +14,7 @@ public interface OptionRepository extends JpaRepository<Option, Long> {
     @Transactional
     @Modifying
     void deleteByProductId(Long productId);
-    Page<Option> findAllByProductId(Long productId, Pageable pageable);
+    List<Option> findAllByProductId(Long productId);
     List<Option> findAllByProduct(Product product);
     @Query("select count(*) from Option op where op.product.id = ?1")
     int countByProduct(Long productId);

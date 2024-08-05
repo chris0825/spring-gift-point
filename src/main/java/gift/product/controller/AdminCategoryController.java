@@ -28,8 +28,8 @@ public class AdminCategoryController {
     }
 
     @GetMapping
-    public String category(Model model, Pageable pageable) {
-        model.addAttribute("categoryList", categoryService.findAllCategory(pageable));
+    public String category(Model model) {
+        model.addAttribute("categoryList", categoryService.findAllCategory());
         return "category-management";
     }
 

@@ -34,9 +34,9 @@ public class AdminOptionController {
     }
 
     @GetMapping
-    public String getAllOptions(@PathVariable Long productId, Model model, Pageable pageable) {
+    public String getAllOptions(@PathVariable Long productId, Model model) {
         System.out.println("[AdminOptionController] getAllOptions()");
-        model.addAttribute("optionList", optionService.getAllOptions(productId, pageable));
+        model.addAttribute("optionList", optionService.getAllOptions(productId));
         model.addAttribute("product", productService.findById(productId));
         return "product-option";
     }

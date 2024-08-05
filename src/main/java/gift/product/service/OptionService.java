@@ -12,6 +12,7 @@ import gift.product.model.Option;
 import gift.product.repository.OptionRepository;
 import gift.product.repository.ProductRepository;
 import gift.product.validation.OptionValidation;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,9 +36,9 @@ public class OptionService {
         this.optionValidation = optionValidation;
     }
 
-    public Page<Option> getAllOptions(Long id, Pageable pageable) {
+    public List<Option> getAllOptions(Long id) {
         System.out.println("[OptionService] getAllOptions()");
-        return optionRepository.findAllByProductId(id, pageable);
+        return optionRepository.findAllByProductId(id);
     }
 
     public Option registerOption(Long productId, OptionDTO optionDTO) {

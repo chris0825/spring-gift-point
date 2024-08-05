@@ -5,6 +5,7 @@ import gift.product.dto.CategoryDTO;
 import gift.product.model.Category;
 import gift.product.service.CategoryService;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,9 +39,9 @@ public class ApiCategoryController implements CategoryControllerDocs {
     }
 
     @GetMapping
-    public Page<Category> researchCategory(Pageable pageable) {
+    public List<Category> researchCategory() {
         System.out.println("[CategoryController] researchCategory()");
-        return categoryService.findAllCategory(pageable);
+        return categoryService.findAllCategory();
     }
 
     @PutMapping("/{id}")

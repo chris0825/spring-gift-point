@@ -44,9 +44,9 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public Page<Category> findAllCategory(Pageable pageable) {
+    public List<Category> findAllCategory() {
         System.out.println("[CategoryService] getAllCategories()");
-        return categoryRepository.findAll(pageable);
+        return categoryRepository.findAll();
     }
 
     public List<Category> getAllCategories() {
