@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/points")
+@RequestMapping("/admin/members/points")
 public class AdminPointController {
 
     private final MemberService memberService;
@@ -29,7 +29,7 @@ public class AdminPointController {
     public String pointAdminPage(Model model) {
         List<Member> members = memberService.findAll();
         model.addAttribute("members", members);
-        model.addAttribute("pointDTO", new PointRequestDTO());
+        model.addAttribute("point", new PointRequestDTO());
         return "point-management";
     }
 
